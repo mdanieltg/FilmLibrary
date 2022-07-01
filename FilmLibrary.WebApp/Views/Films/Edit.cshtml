@@ -11,23 +11,26 @@
 
 <h2>@ViewData["Title"]</h2>
 
-<form method="post">
+<form method="post" class="row mb-3">
     @Html.AntiForgeryToken()
-    <div class="mb-3 text-danger" asp-validation-summary="All"></div>
 
-    <div class="mb-3">
+    <div class="col-12">
+        <div class="mb-3 text-danger" asp-validation-summary="All"></div>
+    </div>
+
+    <div class="col-12 col-md-5">
         <label asp-for="Title" class="form-label">Título</label>
         <input type="text" asp-for="Title" class="form-control">
         <span class="text-danger" asp-validation-for="Title"></span>
     </div>
 
-    <div class="mb-3">
+    <div class="col-12 col-md-3">
         <label asp-for="Year" class="form-label">Año</label>
         <input type="number" asp-for="Year" class="form-control">
         <span class="text-danger" asp-validation-for="Year"></span>
     </div>
 
-    <div class="mb-3">
+    <div class="col-12 col-md-4">
         <label asp-for="DirectorId" class="form-label">Director</label>
         <select class="form-select" asp-for="DirectorId">
             @foreach (var director in ViewBag.Directors as IEnumerable<FilmLibrary.Domain.Entities.Director>)
@@ -38,13 +41,13 @@
         <span class="text-danger" asp-validation-for="DirectorId"></span>
     </div>
 
-    <div class="mb-3">
+    <div class="col-12">
         <label asp-for="Plot" class="form-label">Argumento</label>
-        <input type="text" asp-for="Plot" class="form-control">
+        <textarea asp-for="Plot" class="form-control"></textarea>
         <span class="text-danger" asp-validation-for="Plot"></span>
     </div>
 
-    <div class="mb-3">
+    <div class="col-12 col-md-2">
         <label asp-for="RatingId" class="form-label">Clasificación</label>
         <select class="form-select" asp-for="RatingId">
             @foreach (var rating in ViewBag.Ratings as IEnumerable<FilmLibrary.Domain.Entities.Rating>)
@@ -55,13 +58,13 @@
         <span class="text-danger" asp-validation-for="RatingId"></span>
     </div>
 
-    <div class="mb-3">
+    <div class="col-12 col-md-4">
         <label asp-for="ReleaseDate" class="form-label">Fecha de estreno</label>
         <input type="date" asp-for="ReleaseDate" class="form-control">
         <span class="text-danger" asp-validation-for="ReleaseDate"></span>
     </div>
 
-    <div class="mb-3">
+    <div class="col-12 col-md-6">
         <label asp-for="CountryOfOriginId" class="form-label">País de origen</label>
         <select class="form-select" asp-for="CountryOfOriginId">
             @foreach (var country in ViewBag.Countries as IEnumerable<FilmLibrary.Domain.Entities.Country>)
@@ -72,12 +75,12 @@
         <span class="text-danger" asp-validation-for="CountryOfOriginId"></span>
     </div>
 
-    <div class="">
+    <div class="col-12 mt-3">
         <input type="submit" value="Guardar" class="btn btn-primary">
         <input type="reset" value="Restablecer" class="btn btn-secondary">
     </div>
 </form>
 
-<p class="mt-3">
+<p>
     @Html.ActionLink("Volver a la lista", "Index")
 </p>
