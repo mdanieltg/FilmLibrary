@@ -1,0 +1,37 @@
+﻿@model FilmLibrary.Domain.Entities.Director
+@{ ViewData["Title"] = "Eliminar director"; }
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Inicio</a></li>
+        <li class="breadcrumb-item"><a asp-controller="Directors" asp-action="Index">Directores</a></li>
+        <li class="breadcrumb-item active">@ViewData["Title"]</li>
+    </ol>
+</nav>
+
+<h2>@ViewData["Title"]</h2>
+
+<h4>¿Está seguro que desea eliminar este director?</h4>
+
+<div>
+    <dl>
+        <dt>Id</dt>
+        <dd>@Model.Id</dd>
+    </dl>
+    <dl>
+        <dt>Nombre</dt>
+        <dd>@Model.Name</dd>
+    </dl>
+</div>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div>
+        <input type="submit" class="btn btn-danger" value="Eliminar">
+    </div>
+}
+
+<p>
+    @Html.ActionLink("Volver a la lista", "Index")
+</p>

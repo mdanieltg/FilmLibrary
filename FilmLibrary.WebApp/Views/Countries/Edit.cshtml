@@ -1,0 +1,31 @@
+﻿@model Country
+@{ ViewData["Title"] = "Editar país"; }
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Inicio</a></li>
+        <li class="breadcrumb-item"><a asp-controller="Countries" asp-action="Index">Países</a></li>
+        <li class="breadcrumb-item active">@ViewData["Title"]</li>
+    </ol>
+</nav>
+
+<h2>@ViewData["Title"]</h2>
+
+<form method="post">
+    @Html.AntiForgeryToken()
+    <div class="mb-3 text-danger" asp-validation-summary="All"></div>
+
+    <div class="mb-3">
+        <label asp-for="Name" class="form-label">Nombre</label>
+        <input type="text" asp-for="Name" class="form-control">
+        <span class="text-danger" asp-validation-for="Name"></span>
+    </div>
+
+    <div class="mb-3">
+        <input type="submit" class="btn btn-primary" value="Guardar">
+        <input type="reset" class="btn btn-secondary" value="Restablecer">
+    </div>
+</form>
+<p>
+    @Html.ActionLink("Volver a la lista", "Index")
+</p>
