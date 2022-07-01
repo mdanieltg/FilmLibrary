@@ -1,0 +1,47 @@
+﻿@model IEnumerable<FilmLibrary.Domain.Entities.Film>
+@{ ViewData["Title"] = "Películas"; }
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Inicio</a></li>
+        <li class="breadcrumb-item active">@ViewData["Title"]</li>
+    </ol>
+</nav>
+
+<h2>@ViewData["Title"]</h2>
+
+<p>
+    @Html.ActionLink("Crear", "Create")
+</p>
+
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Título</th>
+        <th>Director</th>
+        <th>Clasificación</th>
+        <th>Año</th>
+        <th>País de origen</th>
+        <th>Acciones</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var film in Model)
+    {
+        <tr>
+            <td>@film.Id</td>
+            <td>@film.Title</td>
+            <td>@film.Director?.Name</td>
+            <td>@film.Rating?.Name</td>
+            <td>@film.Year</td>
+            <td>@film.CountryOfOrigin?.Name</td>
+            <td>
+                @Html.ActionLink("Editar", "Edit", new { filmId = film.Id }) |
+                @Html.ActionLink("Detalles", "Details", new { filmId = film.Id }) |
+                @Html.ActionLink("Eliminar", "Delete", new { filmId = film.Id })
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>

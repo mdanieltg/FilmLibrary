@@ -9,10 +9,11 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<FilmLibraryDbContext>(optionsBuilder =>
     optionsBuilder.UseSqlServer("Server=localhost;Database=FilmLibrary;Trusted_Connection=True;"));
-builder.Services.AddScoped<IFilmRepository, FilmRepository>();
 builder.Services.AddScoped<IDirectorRepository, DirectorRepository>();
 builder.Services.AddScoped<IGenreRepository, GenreRepository>();
 builder.Services.AddScoped<ICountryRepository, CountryRepository>();
+builder.Services.AddScoped<IFilmRepository, FilmRepository>();
+builder.Services.AddScoped<IRatingRepository, RatingRepository>();
 
 var app = builder.Build();
 

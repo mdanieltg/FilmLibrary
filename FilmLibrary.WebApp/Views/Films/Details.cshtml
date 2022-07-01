@@ -1,0 +1,62 @@
+﻿@model FilmLibrary.Domain.Entities.Film
+@{ ViewData["Title"] = "Detalle de película"; }
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Inicio</a></li>
+        <li class="breadcrumb-item"><a asp-controller="Films" asp-action="Index">Películas</a></li>
+        <li class="breadcrumb-item active">@ViewData["Title"]</li>
+    </ol>
+</nav>
+
+<h2>@ViewData["Title"]</h2>
+
+<div>
+    <dl>
+        <dt>Id</dt>
+        <dd>@Model.Id</dd>
+    </dl>
+    <dl>
+        <dt>Título</dt>
+        <dd>@Model.Title</dd>
+    </dl>
+    <dl>
+        <dt>Año</dt>
+        <dd>@Model.Year</dd>
+    </dl>
+    <dl>
+        <dt>Director</dt>
+        <dd>@Model.Director?.Name</dd>
+    </dl>
+    <dl>
+        <dt>Argumento</dt>
+        <dd>@Model.Plot</dd>
+    </dl>
+    <dl>
+        <dt>Clasificación</dt>
+        <dd>@Model.Rating?.Name</dd>
+    </dl>
+    <dl>
+        <dt>Fecha de estreno</dt>
+        <dd>@Model.ReleaseDate.ToString("d")</dd>
+    </dl>
+    <dl>
+        <dt>País de origen</dt>
+        <dd>@Model.CountryOfOrigin?.Name</dd>
+    </dl>
+    <dl>
+        <dt>Géneros</dt>
+        <dd>
+            <ul>
+                @foreach (var genre in Model.Genres)
+                {
+                    <li>@genre.Name</li>
+                }
+            </ul>
+        </dd>
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Editar", "Edit", new { filmId = Model.Id }) |
+    @Html.ActionLink("Volver a la lista", "Index")
+</p>
