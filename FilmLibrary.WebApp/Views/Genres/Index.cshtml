@@ -23,15 +23,15 @@
     </tr>
     </thead>
     <tbody>
-    @foreach (var director in Model)
+    @foreach (var genre in Model)
     {
         <tr>
-            <td>@director.Id</td>
-            <td>@director.Name</td>
+            <td>@genre.Id</td>
+            <td>@genre.Name</td>
             <td>
-                @Html.ActionLink("Editar", "Edit", new { genreId = director.Id }) |
-                @Html.ActionLink("Detalles", "Details", new { genreId = director.Id }) |
-                @Html.ActionLink("Eliminar", "Delete", new { genreId = director.Id })
+                @Html.ActionLink("Editar", "Edit", new { genreId = genre.Id }) |
+                @Html.ActionLink("Detalles", "Details", new { genreId = genre.Id }) |
+                @Html.ActionLink("Eliminar", "Delete", new { genreId = genre.Id })
             </td>
         </tr>
     }
