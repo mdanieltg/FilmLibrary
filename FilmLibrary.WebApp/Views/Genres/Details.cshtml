@@ -22,10 +22,8 @@
     </dl>
 </div>
 
-<div>
-    <a asp-action="Edit" asp-route-genreId="@Model.Id" class="btn btn-primary">Editar</a>
-</div>
-
 <div class="mt-2">
+    <a asp-action="Edit" asp-route-genreId="@Model.Id" class="btn btn-primary">Editar</a>
+    <a asp-action="Delete" asp-route-genreId="@Model.Id" class="btn btn-danger">Eliminar</a>
     <a asp-action="Index" class="btn btn-info">Volver a la lista</a>
 </div>
