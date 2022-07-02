@@ -11,50 +11,50 @@
 
 <h2>@ViewData["Title"]</h2>
 
-<div>
-    <dl>
-        <dt>Id</dt>
-        <dd>@Model.Id</dd>
-    </dl>
-    <dl>
-        <dt>Título</dt>
-        <dd>@Model.Title</dd>
-    </dl>
-    <dl>
-        <dt>Año</dt>
-        <dd>@Model.Year</dd>
-    </dl>
-    <dl>
-        <dt>Director</dt>
-        <dd>@Model.Director?.Name</dd>
-    </dl>
-    <dl>
-        <dt>Argumento</dt>
-        <dd>@Model.Plot</dd>
-    </dl>
-    <dl>
-        <dt>Clasificación</dt>
-        <dd>@Model.Rating?.Name</dd>
-    </dl>
-    <dl>
-        <dt>Fecha de estreno</dt>
-        <dd>@Model.ReleaseDate.ToString("d")</dd>
-    </dl>
-    <dl>
-        <dt>País de origen</dt>
-        <dd>@Model.CountryOfOrigin?.Name</dd>
-    </dl>
-    <dl>
-        <dt>Géneros</dt>
-        <dd>
+<div class="row g-3">
+    <div class="col-12">
+        <div class="form-label">Id</div>
+        <div class="form-control bg-dark bg-opacity-10">@Model.Id</div>
+    </div>
+    <div class="col-12 col-md-8">
+        <div class="form-label">Título</div>
+        <div class="form-control bg-dark bg-opacity-10">@Model.Title</div>
+    </div>
+    <div class="col-12 col-md-4">
+        <div class="form-label">Director</div>
+        <div class="form-control bg-dark bg-opacity-10">@Model.Director?.Name</div>
+    </div>
+    <div class="col-12">
+        <div class="form-label">Argumento</div>
+        <div class="form-control bg-dark bg-opacity-10">@Model.Plot</div>
+    </div>
+    <div class="col-12 col-md-2">
+        <div class="form-label">Clasificación</div>
+        <div class="form-control bg-dark bg-opacity-10">@Model.Rating?.Name</div>
+    </div>
+    <div class="col-12 col-md-2">
+        <div class="form-label">Año</div>
+        <div class="form-control bg-dark bg-opacity-10">@Model.Year</div>
+    </div>
+    <div class="col-12 col-md-4">
+        <div class="form-label">Fecha de estreno</div>
+        <div class="form-control bg-dark bg-opacity-10">@Model.ReleaseDate.ToString("d")</div>
+    </div>
+    <div class="col-12 col-md-4">
+        <div class="form-label">País de origen</div>
+        <div class="form-control bg-dark bg-opacity-10">@Model.CountryOfOrigin?.Name</div>
+    </div>
+    <div class="col-12">
+        <div class="form-label">Géneros</div>
+        <div>
             <ul>
                 @foreach (var genre in Model.Genres)
                 {
                     <li>@genre.Name</li>
                 }
             </ul>
-        </dd>
-    </dl>
+        </div>
+    </div>
 </div>
 
 <div class="mt-2">
