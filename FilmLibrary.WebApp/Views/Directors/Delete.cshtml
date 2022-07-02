@@ -11,7 +11,7 @@
 
 <h2>@ViewData["Title"]</h2>
 
-<h4>¿Está seguro que desea eliminar este director?</h4>
+<div class="alert alert-danger">¿Está seguro que desea eliminar este director?</div>
 
 <div>
     <dl>
@@ -32,6 +32,6 @@
     </div>
 }
 
-<p>
-    @Html.ActionLink("Volver a la lista", "Index")
-</p>
+<div class="mt-2">
+    <a asp-action="Index" class="btn btn-info">Volver a la lista</a>
+</div>

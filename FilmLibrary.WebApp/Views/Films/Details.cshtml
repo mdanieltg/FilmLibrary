@@ -56,7 +56,8 @@
         </dd>
     </dl>
 </div>
-<p>
-    @Html.ActionLink("Editar", "Edit", new { filmId = Model.Id }) |
-    @Html.ActionLink("Volver a la lista", "Index")
-</p>
+
+<div class="mt-2">
+    <a asp-action="Edit" asp-route-filmId="@Model.Id" class="btn btn-primary">Editar</a>
+    <a asp-action="Index" class="btn btn-info">Volver a la lista</a>
+</div>

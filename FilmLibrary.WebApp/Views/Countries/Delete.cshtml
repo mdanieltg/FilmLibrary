@@ -3,19 +3,15 @@
 
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
-        <li class="breadcrumb-item">
-            <a asp-controller="Home" asp-action="Index">Inicio</a>
-        </li>
-        <li class="breadcrumb-item">
-            <a asp-controller="Countries" asp-action="Index">Países</a>
-        </li>
+        <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Inicio</a></li>
+        <li class="breadcrumb-item"><a asp-controller="Countries" asp-action="Index">Países</a></li>
         <li class="breadcrumb-item active">@ViewData["Title"]</li>
     </ol>
 </nav>
 
 <h2>@ViewData["Title"]</h2>
 
-<h4>¿Está seguro que desea eliminar este país?</h4>
+<div class="alert alert-danger">¿Está seguro que desea eliminar este país?</div>
 
 <div>
     <dl>
@@ -36,6 +32,6 @@
     </div>
 }
 
-<p>
-    @Html.ActionLink("Volver a la lista", "Index")
-</p>
+<div class="mt-2">
+    <a asp-action="Index" class="btn btn-info">Volver a la lista</a>
+</div>

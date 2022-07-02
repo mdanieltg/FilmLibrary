@@ -10,9 +10,9 @@
 
 <h2>@ViewData["Title"]</h2>
 
-<p>
-    @Html.ActionLink("Crear", "Create")
-</p>
+<div>
+    <a asp-action="Create" class="btn btn-primary">Agregar director</a>
+</div>
 
 <table class="table table-striped">
     <thead>
@@ -27,11 +27,12 @@
     {
         <tr>
             <td>@director.Id</td>
-            <td>@director.Name</td>
             <td>
-                @Html.ActionLink("Editar", "Edit", new { directorId = director.Id }) |
-                @Html.ActionLink("Detalles", "Details", new { directorId = director.Id }) |
-                @Html.ActionLink("Eliminar", "Delete", new { directorId = director.Id })
+                <a asp-action="Details" asp-route-directorId="@director.Id">@director.Name</a>
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-directorId="@director.Id">Editar</a> |
+                <a asp-action="Delete" asp-route-directorId="@director.Id">Eliminar</a>
             </td>
         </tr>
     }

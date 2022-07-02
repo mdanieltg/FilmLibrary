@@ -10,38 +10,41 @@
 
 <h2>@ViewData["Title"]</h2>
 
-<p>
-    @Html.ActionLink("Crear", "Create")
-</p>
+<div>
+    <a asp-action="Create" class="btn btn-primary">Agregar película</a>
+</div>
 
-<table class="table table-striped">
-    <thead>
-    <tr>
-        <th>Id</th>
-        <th>Título</th>
-        <th>Director</th>
-        <th>Clasificación</th>
-        <th>Año</th>
-        <th>País de origen</th>
-        <th>Acciones</th>
-    </tr>
-    </thead>
-    <tbody>
-    @foreach (var film in Model)
-    {
+<div class="table-responsive">
+    <table class="table table-striped">
+        <thead>
         <tr>
-            <td>@film.Id</td>
-            <td>@film.Title</td>
-            <td>@film.Director?.Name</td>
-            <td>@film.Rating?.Name</td>
-            <td>@film.Year</td>
-            <td>@film.CountryOfOrigin?.Name</td>
-            <td>
-                @Html.ActionLink("Editar", "Edit", new { filmId = film.Id }) |
-                @Html.ActionLink("Detalles", "Details", new { filmId = film.Id }) |
-                @Html.ActionLink("Eliminar", "Delete", new { filmId = film.Id })
-            </td>
+            <th>Id</th>
+            <th>Título</th>
+            <th>Director</th>
+            <th>Clasificación</th>
+            <th>Año</th>
+            <th>País de origen</th>
+            <th>Acciones</th>
         </tr>
-    }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+        @foreach (var film in Model)
+        {
+            <tr>
+                <td>@film.Id</td>
+                <td>
+                    <a asp-action="Details" asp-route-filmId="@film.Id">@film.Title</a>
+                </td>
+                <td>@film.Director?.Name</td>
+                <td>@film.Rating?.Name</td>
+                <td>@film.Year</td>
+                <td>@film.CountryOfOrigin?.Name</td>
+                <td>
+                    <a asp-action="Edit" asp-route-filmId="@film.Id">Editar</a> |
+                    <a asp-action="Delete" asp-route-filmId="@film.Id">Eliminar</a>
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+</div>

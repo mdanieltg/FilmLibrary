@@ -10,9 +10,9 @@
 
 <h2>@ViewData["Title"]</h2>
 
-<p>
-    @Html.ActionLink("Crear", "Create")
-</p>
+<div>
+    <a asp-action="Create" class="btn btn-primary">Agregar género</a>
+</div>
 
 <table class="table table-striped">
     <thead>
@@ -27,11 +27,12 @@
     {
         <tr>
             <td>@genre.Id</td>
-            <td>@genre.Name</td>
             <td>
-                @Html.ActionLink("Editar", "Edit", new { genreId = genre.Id }) |
-                @Html.ActionLink("Detalles", "Details", new { genreId = genre.Id }) |
-                @Html.ActionLink("Eliminar", "Delete", new { genreId = genre.Id })
+                <a asp-action="Details" asp-route-genreId="@genre.Id">@genre.Name</a>
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-genreId="@genre.Id">Editar</a> |
+                <a asp-action="Delete" asp-route-genreId="@genre.Id">Eliminar</a>
             </td>
         </tr>
     }
