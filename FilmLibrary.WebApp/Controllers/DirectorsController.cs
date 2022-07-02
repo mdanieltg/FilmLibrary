@@ -22,14 +22,14 @@ public class DirectorsController : Controller
         return View(directors);
     }
 
-    [HttpGet("create")]
-    public ActionResult Create()
+    [HttpGet("add")]
+    public ActionResult Add()
     {
         return View();
     }
 
-    [HttpPost("create")]
-    public async Task<ActionResult> Create(Director director)
+    [HttpPost("add")]
+    public async Task<ActionResult> Add(Director director)
     {
         if (!ModelState.IsValid)
         {

@@ -22,14 +22,14 @@ public class CountriesController : Controller
         return View(countries);
     }
 
-    [HttpGet("create")]
-    public ActionResult Create()
+    [HttpGet("add")]
+    public ActionResult Add()
     {
         return View();
     }
 
-    [HttpPost("create")]
-    public async Task<ActionResult> Create(Country country)
+    [HttpPost("add")]
+    public async Task<ActionResult> Add(Country country)
     {
         if (!ModelState.IsValid)
         {

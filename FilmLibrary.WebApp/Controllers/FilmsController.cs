@@ -32,8 +32,8 @@ public class FilmsController : Controller
         return View(films);
     }
 
-    [HttpGet("create")]
-    public async Task<ActionResult> Create()
+    [HttpGet("add")]
+    public async Task<ActionResult> Add()
     {
         ViewBag.Directors = await _directorRepository.GetAllAsync();
         ViewBag.Countries = await _countryRepository.GetAllAsync();
@@ -41,8 +41,8 @@ public class FilmsController : Controller
         return View();
     }
 
-    [HttpPost("create")]
-    public async Task<ActionResult> Create(Film film)
+    [HttpPost("add")]
+    public async Task<ActionResult> Add(Film film)
     {
         if (!ModelState.IsValid)
         {

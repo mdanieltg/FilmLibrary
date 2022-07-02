@@ -22,14 +22,14 @@ public class GenresController : Controller
         return View(genres);
     }
 
-    [HttpGet("create")]
-    public ActionResult Create()
+    [HttpGet("add")]
+    public ActionResult Add()
     {
         return View();
     }
 
-    [HttpPost("create")]
-    public async Task<ActionResult> Create(Genre genre)
+    [HttpPost("add")]
+    public async Task<ActionResult> Add(Genre genre)
     {
         if (!ModelState.IsValid)
         {
