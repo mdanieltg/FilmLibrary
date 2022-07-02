@@ -8,5 +8,5 @@ public interface IFilmRepository
     Task<Film?> GetAsync(Guid filmId);
     void Create(Film film);
     void Delete(Film film);
-    Task SaveAsync();
+    Task<bool> SaveAsync();
 }

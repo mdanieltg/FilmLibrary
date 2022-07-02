@@ -1,6 +1,7 @@
 ﻿using FilmLibrary.DataRepository;
 using FilmLibrary.Domain.Contracts.Repositories;
 using FilmLibrary.Domain.Entities;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 
 namespace FilmLibrary.Implementation.Repositories;
@@ -18,9 +19,9 @@ public class FilmRepository : IFilmRepository
     {
         return await _dbContext.Films
             .Include(film => film.Director)
-            .Include(film => film.Genres)
             .Include(film => film.CountryOfOrigin)
             .Include(film => film.Rating)
+            .Include(film => film.Genres)
             .ToListAsync();
     }
 
@@ -28,29 +29,14 @@ public class FilmRepository : IFilmRepository
     {
         return await _dbContext.Films
             .Include(film => film.Director)
-            .Include(film => film.Genres)
             .Include(film => film.CountryOfOrigin)
             .Include(film => film.Rating)
+            .Include(film => film.Genres)
             .FirstOrDefaultAsync(film => film.Id == filmId);
     }
 
     public void Create(Film film)
     {
-        if (_dbContext.Directors.Find(film.DirectorId) is null)
-        {
-            throw new ArgumentException($"A director with Id {film.DirectorId} was not found.", nameof(film));
-        }
-
-        if (_dbContext.Directors.Find(film.CountryOfOriginId) is null)
-        {
-            throw new ArgumentException($"A director with Id {film.DirectorId} was not found.", nameof(film));
-        }
-
-        if (_dbContext.Directors.Find(film.RatingId) is null)
-        {
-            throw new ArgumentException($"A director with Id {film.DirectorId} was not found.", nameof(film));
-        }
-
         _dbContext.Films.Add(film);
     }
 
@@ -59,8 +45,16 @@ public class FilmRepository : IFilmRepository
         _dbContext.Films.Remove(film);
     }
 
-    public Task SaveAsync()
+    public async Task<bool> SaveAsync()
     {
-        return _dbContext.SaveChangesAsync();
+        try
+        {
+            return await _dbContext.SaveChangesAsync() > 0;
+        }
+        catch (Exception e) when (e is SqlException || e is DbUpdateException)
+        {
+        }
+
+        return false;
     }
 }
