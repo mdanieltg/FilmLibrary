@@ -16,7 +16,9 @@ public class CountryRepository : ICountryRepository
 
     public async Task<IEnumerable<Country>> GetAllAsync()
     {
-        return await _dbContext.Countries.ToListAsync();
+        return await _dbContext.Countries
+            .OrderBy(c => c.Name)
+            .ToListAsync();
     }
 
     public Task<Country?> GetAsync(Guid countryId)

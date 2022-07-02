@@ -16,7 +16,9 @@ public class GenreRepository : IGenreRepository
 
     public async Task<IEnumerable<Genre>> GetAllAsync()
     {
-        return await _dbContext.Genres.ToListAsync();
+        return await _dbContext.Genres
+            .OrderBy(g => g.Name)
+            .ToListAsync();
     }
 
     public async Task<Genre?> GetAsync(Guid genreId)

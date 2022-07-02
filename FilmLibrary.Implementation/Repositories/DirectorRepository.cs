@@ -16,7 +16,9 @@ public class DirectorRepository : IDirectorRepository
 
     public async Task<IEnumerable<Director>> GetAllAsync()
     {
-        return await _dbContext.Directors.ToListAsync();
+        return await _dbContext.Directors
+            .OrderBy(d => d.Name)
+            .ToListAsync();
     }
 
     public async Task<Director?> GetAsync(Guid directorId)

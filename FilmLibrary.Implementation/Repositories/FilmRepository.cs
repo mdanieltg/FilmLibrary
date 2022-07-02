@@ -22,6 +22,7 @@ public class FilmRepository : IFilmRepository
             .Include(film => film.CountryOfOrigin)
             .Include(film => film.Rating)
             .Include(film => film.Genres)
+            .OrderBy(f => f.Title)
             .ToListAsync();
     }
 
