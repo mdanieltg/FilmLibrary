@@ -18,7 +18,6 @@
     <table class="table table-striped">
         <thead>
         <tr>
-            <th>Id</th>
             <th>Título</th>
             <th>Director</th>
             <th>Clasificación</th>
@@ -31,7 +30,6 @@
         @foreach (var film in Model)
         {
             <tr>
-                <td>@film.Id</td>
                 <td>
                     <a asp-action="Details" asp-route-filmId="@film.Id">@film.Title</a>
                 </td>

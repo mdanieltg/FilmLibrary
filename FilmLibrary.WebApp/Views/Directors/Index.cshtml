@@ -17,7 +17,6 @@
 <table class="table table-striped">
     <thead>
     <tr>
-        <th>Id</th>
         <th>Nombre</th>
         <th>Acciones</th>
     </tr>
@@ -26,7 +25,6 @@
     @foreach (var director in Model)
     {
         <tr>
-            <td>@director.Id</td>
             <td>
                 <a asp-action="Details" asp-route-directorId="@director.Id">@director.Name</a>
             </td>

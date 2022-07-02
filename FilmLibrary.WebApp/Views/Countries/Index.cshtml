@@ -17,7 +17,6 @@
 <table class="table table-striped">
     <thead>
     <tr>
-        <th>Id</th>
         <th>Nombre</th>
         <th>Acciones</th>
     </tr>
@@ -26,7 +25,6 @@
     @foreach (var country in Model)
     {
         <tr>
-            <td>@country.Id</td>
             <td>
                 <a asp-action="Details" asp-route-countryId="@country.Id">@country.Name</a>
             </td>
