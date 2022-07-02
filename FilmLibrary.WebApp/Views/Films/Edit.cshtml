@@ -11,12 +11,8 @@
 
 <h2>@ViewData["Title"]</h2>
 
-<form method="post" class="row">
+<form method="post" class="row g-3">
     @Html.AntiForgeryToken()
-
-    <div class="col-12">
-        <div class="mb-3 text-danger" asp-validation-summary="All"></div>
-    </div>
 
     <div class="col-12 col-md-5">
         <label asp-for="Title" class="form-label">Título</label>
