@@ -29,8 +29,10 @@
                 <a asp-action="Details" asp-route-countryId="@country.Id">@country.Name</a>
             </td>
             <td>
-                <a asp-action="Edit" asp-route-countryId="@country.Id">Editar</a> |
-                <a asp-action="Delete" asp-route-countryId="@country.Id">Eliminar</a>
+                <div class="btn-group btn-group-sm" role="group" aria-label="Edition links">
+                    <a asp-action="Edit" asp-route-countryId="@country.Id" class="btn btn-outline-secondary">Editar</a>
+                    <a asp-action="Delete" asp-route-countryId="@country.Id" class="btn btn-outline-secondary">Eliminar</a>
+                </div>
             </td>
         </tr>
     }

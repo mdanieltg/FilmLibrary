@@ -15,7 +15,7 @@
 </div>
 
 <div class="table-responsive">
-    <table class="table table-striped">
+    <table class="table table-striped align-middle">
         <thead>
         <tr>
             <th>Título</th>
@@ -38,8 +38,10 @@
                 <td>@film.Year</td>
                 <td>@film.CountryOfOrigin?.Name</td>
                 <td>
-                    <a asp-action="Edit" asp-route-filmId="@film.Id">Editar</a> |
-                    <a asp-action="Delete" asp-route-filmId="@film.Id">Eliminar</a>
+                    <div class="btn-group btn-group-sm" role="group" aria-label="Edition links">
+                        <a asp-action="Edit" asp-route-filmId="@film.Id" class="btn btn-outline-secondary">Editar</a>
+                        <a asp-action="Delete" asp-route-filmId="@film.Id" class="btn btn-outline-secondary">Eliminar</a>
+                    </div>
                 </td>
             </tr>
         }
