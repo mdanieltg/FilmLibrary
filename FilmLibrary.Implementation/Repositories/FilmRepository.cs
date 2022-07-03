@@ -27,7 +27,7 @@ public class FilmRepository : IFilmRepository
             .ToListAsync();
     }
 
-    public async Task<Pagination<Film>> GetPaginatedAsync(int offset, int count)
+    public async Task<PaginatedResult<Film>> GetPaginatedAsync(int offset, int count)
     {
         var list = await _dbContext.Films
             .Include(film => film.Director)
@@ -39,7 +39,7 @@ public class FilmRepository : IFilmRepository
             .Take(count)
             .ToListAsync();
 
-        var pagination = new Pagination<Film>
+        var pagination = new PaginatedResult<Film>
         {
             CurrentPage = offset,
             PageSize = count,

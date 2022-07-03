@@ -22,7 +22,7 @@ public class DirectorRepository : IDirectorRepository
             .ToListAsync();
     }
 
-    public async Task<Pagination<Director>> GetPaginatedAsync(int offset, int count)
+    public async Task<PaginatedResult<Director>> GetPaginatedAsync(int offset, int count)
     {
         var list = await _dbContext.Directors
             .OrderBy(c => c.Name)
@@ -30,7 +30,7 @@ public class DirectorRepository : IDirectorRepository
             .Take(count)
             .ToListAsync();
 
-        var pagination = new Pagination<Director>
+        var pagination = new PaginatedResult<Director>
         {
             CurrentPage = offset,
             PageSize = count,

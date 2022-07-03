@@ -22,7 +22,7 @@ public class GenreRepository : IGenreRepository
             .ToListAsync();
     }
 
-    public async Task<Pagination<Genre>> GetPaginatedAsync(int offset, int count)
+    public async Task<PaginatedResult<Genre>> GetPaginatedAsync(int offset, int count)
     {
         var list = await _dbContext.Genres
             .OrderBy(c => c.Name)
@@ -30,7 +30,7 @@ public class GenreRepository : IGenreRepository
             .Take(count)
             .ToListAsync();
 
-        var pagination = new Pagination<Genre>
+        var pagination = new PaginatedResult<Genre>
         {
             CurrentPage = offset,
             PageSize = count,

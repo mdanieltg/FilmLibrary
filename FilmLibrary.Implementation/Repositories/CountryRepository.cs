@@ -22,7 +22,7 @@ public class CountryRepository : ICountryRepository
             .ToListAsync();
     }
 
-    public async Task<Pagination<Country>> GetPaginatedAsync(int offset, int count)
+    public async Task<PaginatedResult<Country>> GetPaginatedAsync(int offset, int count)
     {
         var list = await _dbContext.Countries
             .OrderBy(c => c.Name)
@@ -30,7 +30,7 @@ public class CountryRepository : ICountryRepository
             .Take(count)
             .ToListAsync();
 
-        var pagination = new Pagination<Country>
+        var pagination = new PaginatedResult<Country>
         {
             CurrentPage = offset,
             PageSize = count,
