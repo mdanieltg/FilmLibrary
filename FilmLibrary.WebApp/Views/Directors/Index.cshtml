@@ -10,8 +10,14 @@
 
 <h2>@ViewData["Title"]</h2>
 
-<div>
+<div class="d-flex justify-content-between">
     <a asp-action="Add" class="btn btn-primary">Agregar director</a>
+    <form class="d-flex" role="search">
+        <input type="search" class="form-control me-2" name="search" placeholder="Búsqueda rápida" aria-label="Búsqueda"
+               @{if (ViewBag.SearchString is not null) {<text>value="@ViewBag.SearchString"</text>}}>
+        <input type="submit" value="Buscar" class="btn btn-success me-2">
+        <a asp-action="Index" class="btn btn-secondary" asp-route-page="1" asp-route-count="10">Borrar</a>
+    </form>
 </div>
 
 <table class="table table-striped align-middle">
@@ -52,4 +58,4 @@
 </table>
 
 @await Component.InvokeAsync("PageNavigation",
-    new { currentPage = Model.CurrentPage, pageSize = Model.PageSize, totalPages = Model.TotalPages })
+    new { currentPage = Model.CurrentPage, pageSize = Model.PageSize, totalPages = Model.TotalPages, searchString = ViewBag.SearchString })
