@@ -38,7 +38,7 @@ public class DirectorRepository : IDirectorRepository
             PageSize = count,
             ItemCount = list.Count,
             TotalItems = totalItems,
-            TotalPages = totalItems / count + 1,
+            TotalPages = totalItems % count == 0 ? totalItems / count : totalItems / count + 1,
             Collection = list
         };
 
@@ -64,7 +64,7 @@ public class DirectorRepository : IDirectorRepository
             PageSize = count,
             ItemCount = list.Count,
             TotalItems = totalItems,
-            TotalPages = totalItems / count + 1,
+            TotalPages = totalItems % count == 0 ? totalItems / count : totalItems / count + 1,
             Collection = list
         };
 
