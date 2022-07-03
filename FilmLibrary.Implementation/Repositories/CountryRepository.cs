@@ -30,11 +30,15 @@ public class CountryRepository : ICountryRepository
             .Take(count)
             .ToListAsync();
 
+        var totalItems = await _dbContext.Countries.CountAsync();
+
         var pagination = new PaginatedResult<Country>
         {
             CurrentPage = offset,
             PageSize = count,
-            TotalPages = await _dbContext.Countries.CountAsync() / count + 1,
+            ItemCount = list.Count,
+            TotalItems = totalItems,
+            TotalPages = totalItems / count + 1,
             Collection = list
         };
 
@@ -58,6 +62,8 @@ public class CountryRepository : ICountryRepository
         {
             CurrentPage = offset,
             PageSize = count,
+            ItemCount = list.Count,
+            TotalItems = totalItems,
             TotalPages = totalItems / count + 1,
             Collection = list
         };

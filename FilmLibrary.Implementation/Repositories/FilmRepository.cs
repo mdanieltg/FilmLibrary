@@ -39,11 +39,15 @@ public class FilmRepository : IFilmRepository
             .Take(count)
             .ToListAsync();
 
+        var totalItems = await _dbContext.Films.CountAsync();
+
         var pagination = new PaginatedResult<Film>
         {
             CurrentPage = offset,
             PageSize = count,
-            TotalPages = await _dbContext.Films.CountAsync() / count + 1,
+            ItemCount = list.Count,
+            TotalItems = totalItems,
+            TotalPages = totalItems / count + 1,
             Collection = list
         };
 
@@ -67,6 +71,8 @@ public class FilmRepository : IFilmRepository
         {
             CurrentPage = offset,
             PageSize = count,
+            ItemCount = list.Count,
+            TotalItems = totalItems,
             TotalPages = totalItems / count + 1,
             Collection = list
         };

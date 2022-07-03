@@ -30,11 +30,15 @@ public class DirectorRepository : IDirectorRepository
             .Take(count)
             .ToListAsync();
 
+        var totalItems = await _dbContext.Directors.CountAsync();
+
         var pagination = new PaginatedResult<Director>
         {
             CurrentPage = offset,
             PageSize = count,
-            TotalPages = await _dbContext.Directors.CountAsync() / count + 1,
+            ItemCount = list.Count,
+            TotalItems = totalItems,
+            TotalPages = totalItems / count + 1,
             Collection = list
         };
 
@@ -58,6 +62,8 @@ public class DirectorRepository : IDirectorRepository
         {
             CurrentPage = offset,
             PageSize = count,
+            ItemCount = list.Count,
+            TotalItems = totalItems,
             TotalPages = totalItems / count + 1,
             Collection = list
         };

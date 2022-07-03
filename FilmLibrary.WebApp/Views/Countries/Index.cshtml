@@ -39,9 +39,13 @@
     </tbody>
     <tfoot>
     <tr>
-        <td colspan="2" class="text-end">
-            @await Component.InvokeAsync("PageInformation",
-                new { currentPage = Model.CurrentPage, totalPages = Model.TotalPages })
+        <td colspan="2">
+            <div class="d-flex justify-content-between text-muted">
+                @await Component.InvokeAsync("RegistriesCount",
+                    new { itemCount = Model.ItemCount, totalItems = Model.TotalItems })
+                @await Component.InvokeAsync("PageInformation",
+                    new { currentPage = Model.CurrentPage, totalPages = Model.TotalPages })
+            </div>
         </td>
     </tr>
     </tfoot>

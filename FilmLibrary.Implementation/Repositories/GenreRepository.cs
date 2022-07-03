@@ -30,11 +30,15 @@ public class GenreRepository : IGenreRepository
             .Take(count)
             .ToListAsync();
 
+        var totalItems = await _dbContext.Genres.CountAsync();
+
         var pagination = new PaginatedResult<Genre>
         {
             CurrentPage = offset,
             PageSize = count,
-            TotalPages = await _dbContext.Genres.CountAsync() / count + 1,
+            ItemCount = list.Count,
+            TotalItems = totalItems,
+            TotalPages = totalItems / count + 1,
             Collection = list
         };
 
@@ -58,6 +62,8 @@ public class GenreRepository : IGenreRepository
         {
             CurrentPage = offset,
             PageSize = count,
+            ItemCount = list.Count,
+            TotalItems = totalItems,
             TotalPages = totalItems / count + 1,
             Collection = list
         };
