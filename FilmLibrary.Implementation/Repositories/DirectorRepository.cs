@@ -1,6 +1,7 @@
 ﻿using FilmLibrary.DataRepository;
 using FilmLibrary.Domain.Contracts.Repositories;
 using FilmLibrary.Domain.Entities;
+using FilmLibrary.Domain.Helper;
 using Microsoft.EntityFrameworkCore;
 
 namespace FilmLibrary.Implementation.Repositories;
@@ -19,6 +20,25 @@ public class DirectorRepository : IDirectorRepository
         return await _dbContext.Directors
             .OrderBy(d => d.Name)
             .ToListAsync();
+    }
+
+    public async Task<Pagination<Director>> GetPaginatedAsync(int offset, int count)
+    {
+        var list = await _dbContext.Directors
+            .OrderBy(c => c.Name)
+            .Skip(count * (offset - 1))
+            .Take(count)
+            .ToListAsync();
+
+        var pagination = new Pagination<Director>
+        {
+            Offset = offset,
+            Count = count,
+            Total = list.Count,
+            Collection = list
+        };
+
+        return pagination;
     }
 
     public async Task<Director?> GetAsync(Guid directorId)

@@ -16,10 +16,10 @@ public class CountriesController : Controller
         _countryRepository = countryRepository ?? throw new ArgumentNullException(nameof(countryRepository));
     }
 
-    public async Task<ActionResult> Index()
+    public async Task<ActionResult> Index(Pagination pagination)
     {
-        var countries = await _countryRepository.GetAllAsync();
-        return View(countries);
+        var paginated = await _countryRepository.GetPaginatedAsync(pagination.Page, pagination.Count);
+        return View(paginated.Collection);
     }
 
     [HttpGet("add")]

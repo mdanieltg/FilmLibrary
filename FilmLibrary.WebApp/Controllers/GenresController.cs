@@ -16,10 +16,10 @@ public class GenresController : Controller
         _genreRepository = genreRepository ?? throw new ArgumentNullException(nameof(genreRepository));
     }
 
-    public async Task<ActionResult> Index()
+    public async Task<ActionResult> Index(Pagination pagination)
     {
-        var genres = await _genreRepository.GetAllAsync();
-        return View(genres);
+        var paginated = await _genreRepository.GetPaginatedAsync(pagination.Page, pagination.Count);
+        return View(paginated.Collection);
     }
 
     [HttpGet("add")]

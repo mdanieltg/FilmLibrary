@@ -1,6 +1,7 @@
 ﻿using FilmLibrary.DataRepository;
 using FilmLibrary.Domain.Contracts.Repositories;
 using FilmLibrary.Domain.Entities;
+using FilmLibrary.Domain.Helper;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 
@@ -24,6 +25,29 @@ public class FilmRepository : IFilmRepository
             .Include(film => film.Genres)
             .OrderBy(f => f.Title)
             .ToListAsync();
+    }
+
+    public async Task<Pagination<Film>> GetPaginatedAsync(int offset, int count)
+    {
+        var list = await _dbContext.Films
+            .Include(film => film.Director)
+            .Include(film => film.CountryOfOrigin)
+            .Include(film => film.Rating)
+            .Include(film => film.Genres)
+            .OrderBy(c => c.Title)
+            .Skip(count * (offset - 1))
+            .Take(count)
+            .ToListAsync();
+
+        var pagination = new Pagination<Film>
+        {
+            Offset = offset,
+            Count = count,
+            Total = list.Count,
+            Collection = list
+        };
+
+        return pagination;
     }
 
     public async Task<Film?> GetAsync(Guid filmId)
