@@ -10,13 +10,13 @@
 
 <h2>@ViewData["Title"]</h2>
 
-<div class="d-flex justify-content-between">
+<div class="d-flex flex-wrap gap-2 justify-content-between">
     <a asp-action="Add" class="btn btn-primary">Agregar país</a>
     <form class="d-flex" role="search">
         <input type="search" class="form-control me-2" name="search" placeholder="Búsqueda rápida" aria-label="Búsqueda"
                @{if (ViewBag.SearchString is not null) {<text>value="@ViewBag.SearchString"</text>}}>
         <input type="submit" value="Buscar" class="btn btn-success me-2">
-        <a asp-action="Index" class="btn btn-secondary" asp-route-page="1" asp-route-count="10">Borrar</a>
+        <a asp-action="Index" class="btn btn-secondary" asp-route-page="1">Borrar</a>
     </form>
 </div>
 
