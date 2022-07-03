@@ -50,6 +50,30 @@ public class FilmRepository : IFilmRepository
         return pagination;
     }
 
+    public async Task<PaginatedResult<Film>> PaginatedSearchAsync(string searchString, int offset, int count)
+    {
+        var list = await _dbContext.Films
+            .Where(f => f.Title.Contains(searchString))
+            .OrderBy(f => f.Title)
+            .Skip(count * (offset - 1))
+            .Take(count)
+            .ToListAsync();
+
+        var totalItems = await _dbContext.Films
+            .Where(f => f.Title.Contains(searchString))
+            .CountAsync();
+
+        var paginatedResult = new PaginatedResult<Film>
+        {
+            CurrentPage = offset,
+            PageSize = count,
+            TotalPages = totalItems / count + 1,
+            Collection = list
+        };
+
+        return paginatedResult;
+    }
+
     public async Task<Film?> GetAsync(Guid filmId)
     {
         return await _dbContext.Films

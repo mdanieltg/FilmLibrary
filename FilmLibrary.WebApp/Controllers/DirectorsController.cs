@@ -16,10 +16,20 @@ public class DirectorsController : Controller
         _directorRepository = directorRepository ?? throw new ArgumentNullException(nameof(directorRepository));
     }
 
-    public async Task<ActionResult> Index(Pagination pagination)
+    public async Task<ActionResult> Index(string search, Pagination pagination)
     {
-        var paginated = await _directorRepository.GetPaginatedAsync(pagination.Page, pagination.Count);
-        return View(paginated);
+        if (string.IsNullOrEmpty(search))
+        {
+            var paginated = await _directorRepository.GetPaginatedAsync(pagination.Page, pagination.Count);
+            return View(paginated);
+        }
+        else
+        {
+            var paginatedSearchResult = await _directorRepository.PaginatedSearchAsync(search, pagination.Page,
+                pagination.Count);
+            ViewBag.SearchString = search;
+            return View(paginatedSearchResult);
+        }
     }
 
     [HttpGet("add")]

@@ -26,10 +26,20 @@ public class FilmsController : Controller
         _ratingRepository = ratingRepository ?? throw new ArgumentNullException(nameof(ratingRepository));
     }
 
-    public async Task<ActionResult> Index(Pagination pagination)
+    public async Task<ActionResult> Index(string search, Pagination pagination)
     {
-        var paginated = await _filmRepository.GetPaginatedAsync(pagination.Page, pagination.Count);
-        return View(paginated);
+        if (string.IsNullOrEmpty(search))
+        {
+            var paginated = await _filmRepository.GetPaginatedAsync(pagination.Page, pagination.Count);
+            return View(paginated);
+        }
+        else
+        {
+            var paginatedSearchResult = await _filmRepository.PaginatedSearchAsync(search, pagination.Page,
+                pagination.Count);
+            ViewBag.SearchString = search;
+            return View(paginatedSearchResult);
+        }
     }
 
     [HttpGet("add")]

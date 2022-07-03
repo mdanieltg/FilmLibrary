@@ -16,10 +16,20 @@ public class CountriesController : Controller
         _countryRepository = countryRepository ?? throw new ArgumentNullException(nameof(countryRepository));
     }
 
-    public async Task<ActionResult> Index(Pagination pagination)
+    public async Task<ActionResult> Index(string search, Pagination pagination)
     {
-        var paginated = await _countryRepository.GetPaginatedAsync(pagination.Page, pagination.Count);
-        return View(paginated);
+        if (string.IsNullOrEmpty(search))
+        {
+            var paginated = await _countryRepository.GetPaginatedAsync(pagination.Page, pagination.Count);
+            return View(paginated);
+        }
+        else
+        {
+            var paginatedSearchResult = await _countryRepository.PaginatedSearchAsync(search, pagination.Page,
+                pagination.Count);
+            ViewBag.SearchString = search;
+            return View(paginatedSearchResult);
+        }
     }
 
     [HttpGet("add")]

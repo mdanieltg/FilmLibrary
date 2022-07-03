@@ -7,4 +7,5 @@ public class PageNavigationModel
     public int? NextPage => CurrentPage >= TotalPages ? null : CurrentPage + 1;
     public int PageSize { get; set; }
     public int TotalPages { get; set; }
+    public string? SearchString { get; set; }
 }

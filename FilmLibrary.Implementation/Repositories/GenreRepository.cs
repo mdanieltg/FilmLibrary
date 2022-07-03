@@ -41,6 +41,30 @@ public class GenreRepository : IGenreRepository
         return pagination;
     }
 
+    public async Task<PaginatedResult<Genre>> PaginatedSearchAsync(string searchString, int offset, int count)
+    {
+        var list = await _dbContext.Genres
+            .Where(g => g.Name.Contains(searchString))
+            .OrderBy(g => g.Name)
+            .Skip(count * (offset - 1))
+            .Take(count)
+            .ToListAsync();
+
+        var totalItems = await _dbContext.Genres
+            .Where(g => g.Name.Contains(searchString))
+            .CountAsync();
+
+        var paginatedResult = new PaginatedResult<Genre>
+        {
+            CurrentPage = offset,
+            PageSize = count,
+            TotalPages = totalItems / count + 1,
+            Collection = list
+        };
+
+        return paginatedResult;
+    }
+
     public async Task<Genre?> GetAsync(Guid genreId)
     {
         return await _dbContext.Genres.FindAsync(genreId);

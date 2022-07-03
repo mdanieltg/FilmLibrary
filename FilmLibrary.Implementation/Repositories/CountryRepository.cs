@@ -41,6 +41,30 @@ public class CountryRepository : ICountryRepository
         return pagination;
     }
 
+    public async Task<PaginatedResult<Country>> PaginatedSearchAsync(string searchString, int offset, int count)
+    {
+        var list = await _dbContext.Countries
+            .Where(c => c.Name.Contains(searchString))
+            .OrderBy(c => c.Name)
+            .Skip(count * (offset - 1))
+            .Take(count)
+            .ToListAsync();
+
+        var totalItems = await _dbContext.Countries
+            .Where(c => c.Name.Contains(searchString))
+            .CountAsync();
+
+        var paginatedResult = new PaginatedResult<Country>
+        {
+            CurrentPage = offset,
+            PageSize = count,
+            TotalPages = totalItems / count + 1,
+            Collection = list
+        };
+
+        return paginatedResult;
+    }
+
     public Task<Country?> GetAsync(Guid countryId)
     {
         return _dbContext.Countries.FirstOrDefaultAsync(c => c.Id == countryId);

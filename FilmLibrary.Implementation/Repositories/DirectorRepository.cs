@@ -41,6 +41,30 @@ public class DirectorRepository : IDirectorRepository
         return pagination;
     }
 
+    public async Task<PaginatedResult<Director>> PaginatedSearchAsync(string searchString, int offset, int count)
+    {
+        var list = await _dbContext.Directors
+            .Where(d => d.Name.Contains(searchString))
+            .OrderBy(d => d.Name)
+            .Skip(count * (offset - 1))
+            .Take(count)
+            .ToListAsync();
+
+        var totalItems = await _dbContext.Directors
+            .Where(d => d.Name.Contains(searchString))
+            .CountAsync();
+
+        var paginatedResult = new PaginatedResult<Director>
+        {
+            CurrentPage = offset,
+            PageSize = count,
+            TotalPages = totalItems / count + 1,
+            Collection = list
+        };
+
+        return paginatedResult;
+    }
+
     public async Task<Director?> GetAsync(Guid directorId)
     {
         return await _dbContext.Directors.FindAsync(directorId);
