@@ -19,7 +19,7 @@ public class GenresController : Controller
     public async Task<ActionResult> Index(Pagination pagination)
     {
         var paginated = await _genreRepository.GetPaginatedAsync(pagination.Page, pagination.Count);
-        return View(paginated.Collection);
+        return View(paginated);
     }
 
     [HttpGet("add")]

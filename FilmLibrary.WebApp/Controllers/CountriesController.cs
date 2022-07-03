@@ -19,7 +19,7 @@ public class CountriesController : Controller
     public async Task<ActionResult> Index(Pagination pagination)
     {
         var paginated = await _countryRepository.GetPaginatedAsync(pagination.Page, pagination.Count);
-        return View(paginated.Collection);
+        return View(paginated);
     }
 
     [HttpGet("add")]

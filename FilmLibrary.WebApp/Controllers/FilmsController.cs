@@ -29,7 +29,7 @@ public class FilmsController : Controller
     public async Task<ActionResult> Index(Pagination pagination)
     {
         var paginated = await _filmRepository.GetPaginatedAsync(pagination.Page, pagination.Count);
-        return View(paginated.Collection);
+        return View(paginated);
     }
 
     [HttpGet("add")]

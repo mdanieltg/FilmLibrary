@@ -1,4 +1,4 @@
-﻿@model IEnumerable<FilmLibrary.Domain.Entities.Country>
+﻿@model FilmLibrary.Domain.Helper.Pagination<FilmLibrary.Domain.Entities.Country>
 @{ ViewData["Title"] = "Países"; }
 
 <nav aria-label="breadcrumb">
@@ -22,7 +22,7 @@
     </tr>
     </thead>
     <tbody>
-    @foreach (var country in Model)
+    @foreach (var country in Model.Collection)
     {
         <tr>
             <td>
@@ -37,4 +37,15 @@
         </tr>
     }
     </tbody>
+    <tfoot>
+    <tr>
+        <td colspan="2" class="text-end">
+            @await Component.InvokeAsync("PageInformation",
+                new { currentPage = Model.CurrentPage, totalPages = Model.TotalPages })
+        </td>
+    </tr>
+    </tfoot>
 </table>
+
+@await Component.InvokeAsync("PageNavigation",
+    new { currentPage = Model.CurrentPage, pageSize = Model.PageSize, totalPages = Model.TotalPages })

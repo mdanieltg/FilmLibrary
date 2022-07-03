@@ -1,4 +1,4 @@
-﻿@model IEnumerable<FilmLibrary.Domain.Entities.Film>
+﻿@model FilmLibrary.Domain.Helper.Pagination<FilmLibrary.Domain.Entities.Film>
 @{ ViewData["Title"] = "Películas"; }
 
 <nav aria-label="breadcrumb">
@@ -27,7 +27,7 @@
         </tr>
         </thead>
         <tbody>
-        @foreach (var film in Model)
+        @foreach (var film in Model.Collection)
         {
             <tr>
                 <td>
@@ -46,5 +46,16 @@
             </tr>
         }
         </tbody>
+        <tfoot>
+        <tr>
+            <td colspan="6" class="text-end">
+                @await Component.InvokeAsync("PageInformation",
+                    new { currentPage = Model.CurrentPage, totalPages = Model.TotalPages })
+            </td>
+        </tr>
+        </tfoot>
     </table>
 </div>
+
+@await Component.InvokeAsync("PageNavigation",
+    new { currentPage = Model.CurrentPage, pageSize = Model.PageSize, totalPages = Model.TotalPages })

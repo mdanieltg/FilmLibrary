@@ -41,9 +41,9 @@ public class FilmRepository : IFilmRepository
 
         var pagination = new Pagination<Film>
         {
-            Offset = offset,
-            Count = count,
-            Total = list.Count,
+            CurrentPage = offset,
+            PageSize = count,
+            TotalPages = await _dbContext.Films.CountAsync() / count + 1,
             Collection = list
         };
 

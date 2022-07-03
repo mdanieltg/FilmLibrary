@@ -19,7 +19,7 @@ public class DirectorsController : Controller
     public async Task<ActionResult> Index(Pagination pagination)
     {
         var paginated = await _directorRepository.GetPaginatedAsync(pagination.Page, pagination.Count);
-        return View(paginated.Collection);
+        return View(paginated);
     }
 
     [HttpGet("add")]

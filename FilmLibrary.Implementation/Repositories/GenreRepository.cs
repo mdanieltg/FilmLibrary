@@ -32,9 +32,9 @@ public class GenreRepository : IGenreRepository
 
         var pagination = new Pagination<Genre>
         {
-            Offset = offset,
-            Count = count,
-            Total = list.Count,
+            CurrentPage = offset,
+            PageSize = count,
+            TotalPages = await _dbContext.Genres.CountAsync() / count + 1,
             Collection = list
         };
 

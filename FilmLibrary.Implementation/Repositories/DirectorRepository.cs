@@ -32,9 +32,9 @@ public class DirectorRepository : IDirectorRepository
 
         var pagination = new Pagination<Director>
         {
-            Offset = offset,
-            Count = count,
-            Total = list.Count,
+            CurrentPage = offset,
+            PageSize = count,
+            TotalPages = await _dbContext.Directors.CountAsync() / count + 1,
             Collection = list
         };
 
