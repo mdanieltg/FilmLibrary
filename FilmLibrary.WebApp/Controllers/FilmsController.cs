@@ -66,11 +66,11 @@ public class FilmsController : Controller
         {
             Title = film.Title,
             Year = film.Year,
-            DirectorId = film.DirectorId,
+            DirectorId = film.DirectorId!.Value,
             Plot = film.Plot,
-            RatingId = film.RatingId,
+            RatingId = film.RatingId!.Value,
             ReleaseDate = film.ReleaseDate,
-            CountryOfOriginId = film.CountryOfOriginId
+            CountryOfOriginId = film.CountryOfOriginId!.Value
         });
         await _filmRepository.SaveAsync();
 
@@ -130,11 +130,11 @@ public class FilmsController : Controller
         {
             currentFilm.Title = film.Title;
             currentFilm.Year = film.Year;
-            currentFilm.DirectorId = film.DirectorId;
+            currentFilm.DirectorId = film.DirectorId!.Value;
             currentFilm.Plot = film.Plot;
-            currentFilm.RatingId = film.RatingId;
+            currentFilm.RatingId = film.RatingId!.Value;
             currentFilm.ReleaseDate = film.ReleaseDate;
-            currentFilm.CountryOfOriginId = film.CountryOfOriginId;
+            currentFilm.CountryOfOriginId = film.CountryOfOriginId!.Value;
             await _filmRepository.SaveAsync();
         }
 

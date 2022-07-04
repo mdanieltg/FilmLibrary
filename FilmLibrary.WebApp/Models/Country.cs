@@ -6,7 +6,7 @@ namespace FilmLibrary.WebApp.Models;
 [DebuggerDisplay("Name: {Name}")]
 public class Country
 {
-    [Required]
+    [Required(ErrorMessage = "El nombre es requerido.")]
     [MaxLength(255)]
     public string Name { get; set; } = "";
 }
