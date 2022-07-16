@@ -8,7 +8,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<FilmLibraryDbContext>(optionsBuilder =>
-    optionsBuilder.UseSqlServer("Server=localhost;Database=FilmLibrary;Trusted_Connection=True;"));
+    optionsBuilder.UseSqlServer(builder.Configuration.GetConnectionString("Default")));
 builder.Services.AddScoped<IDirectorRepository, DirectorRepository>();
 builder.Services.AddScoped<IGenreRepository, GenreRepository>();
 builder.Services.AddScoped<ICountryRepository, CountryRepository>();
