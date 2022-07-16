@@ -29,6 +29,7 @@
     <div class="col-12 col-md-4">
         <label asp-for="DirectorId" class="form-label">Director</label>
         <select class="form-select" asp-for="DirectorId">
+            <option value="">- seleccionar -</option>
             @foreach (var director in (ViewBag.Directors as IEnumerable<FilmLibrary.Domain.Entities.Director>)!)
             {
                 <option value="@director.Id">@director.Name</option>
@@ -46,6 +47,7 @@
     <div class="col-12 col-md-2">
         <label asp-for="RatingId" class="form-label">Clasificación</label>
         <select class="form-select" asp-for="RatingId">
+            <option value="">- seleccionar -</option>
             @foreach (var rating in (ViewBag.Ratings as IEnumerable<FilmLibrary.Domain.Entities.Rating>)!)
             {
                 <option value="@rating.Id">@rating.Name</option>
@@ -63,6 +65,7 @@
     <div class="col-12 col-md-6">
         <label asp-for="CountryOfOriginId" class="form-label">País de origen</label>
         <select class="form-select" asp-for="CountryOfOriginId">
+            <option value="">- seleccionar -</option>
             @foreach (var country in (ViewBag.Countries as IEnumerable<FilmLibrary.Domain.Entities.Country>)!)
             {
                 <option value="@country.Id">@country.Name</option>
