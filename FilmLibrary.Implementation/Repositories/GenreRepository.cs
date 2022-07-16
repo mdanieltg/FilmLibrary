@@ -22,6 +22,14 @@ public class GenreRepository : IGenreRepository
             .ToListAsync();
     }
 
+    public async Task<ICollection<Genre>> GetMultipleAsync(IEnumerable<Guid> genreIds)
+    {
+        return await _dbContext.Genres
+            .OrderBy(g => g.Name)
+            .Where(g => genreIds.Contains(g.Id))
+            .ToListAsync();
+    }
+
     public async Task<PaginatedResult<Genre>> GetPaginatedAsync(int offset, int count)
     {
         var list = await _dbContext.Genres

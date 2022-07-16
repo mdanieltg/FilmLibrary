@@ -46,6 +46,17 @@
         <dt>País de origen</dt>
         <dd>@Model.CountryOfOrigin?.Name</dd>
     </dl>
+    <dl>
+        <dt>Géneros</dt>
+        <dd>
+            <ul>
+                @foreach (var genre in Model.Genres)
+                {
+                    <li>@genre.Name</li>
+                }
+            </ul>
+        </dd>
+    </dl>
 </div>
 
 @using (Html.BeginForm())

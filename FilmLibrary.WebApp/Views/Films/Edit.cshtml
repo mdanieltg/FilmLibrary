@@ -71,6 +71,19 @@
         <span class="text-danger" asp-validation-for="CountryOfOriginId"></span>
     </div>
 
+    <div class="col-12">
+        <label asp-for="GenreIds" class="form-label">Género(s)</label>
+        <select asp-for="GenreIds" class="form-select" multiple>
+            @foreach (var genre in (ViewBag.Genres as IEnumerable<FilmLibrary.Domain.Entities.Genre>)!)
+            {
+                <!option value="@genre.Id" @{if (Model.GenreIds.Contains(genre.Id)) {<text>selected</text>}}>
+                    @genre.Name
+                </!option>
+            }
+        </select>
+        <span class="text-danger" asp-validation-for="GenreIds"></span>
+    </div>
+
     <div class="col-12 mt-3">
         <input type="submit" value="Guardar" class="btn btn-primary">
         <input type="reset" value="Restablecer" class="btn btn-secondary">

@@ -48,6 +48,7 @@ public class FilmsController : Controller
         ViewBag.Directors = await _directorRepository.GetAllAsync();
         ViewBag.Countries = await _countryRepository.GetAllAsync();
         ViewBag.Ratings = await _ratingRepository.GetAllAsync();
+        ViewBag.Genres = await _genreRepository.GetAllAsync();
         return View();
     }
 
@@ -59,18 +60,22 @@ public class FilmsController : Controller
             ViewBag.Directors = await _directorRepository.GetAllAsync();
             ViewBag.Countries = await _countryRepository.GetAllAsync();
             ViewBag.Ratings = await _ratingRepository.GetAllAsync();
-            return View();
+            ViewBag.Genres = await _genreRepository.GetAllAsync();
+            return View(film);
         }
+
+        var genres = await _genreRepository.GetMultipleAsync(film.GenreIds);
 
         _filmRepository.Create(new Domain.Entities.Film
         {
             Title = film.Title,
-            Year = film.Year,
+            Year = film.Year!.Value,
             DirectorId = film.DirectorId!.Value,
             Plot = film.Plot,
             RatingId = film.RatingId!.Value,
-            ReleaseDate = film.ReleaseDate,
-            CountryOfOriginId = film.CountryOfOriginId!.Value
+            ReleaseDate = film.ReleaseDate!.Value,
+            CountryOfOriginId = film.CountryOfOriginId!.Value,
+            Genres = genres
         });
         await _filmRepository.SaveAsync();
 
@@ -101,6 +106,7 @@ public class FilmsController : Controller
         ViewBag.Directors = await _directorRepository.GetAllAsync();
         ViewBag.Countries = await _countryRepository.GetAllAsync();
         ViewBag.Ratings = await _ratingRepository.GetAllAsync();
+        ViewBag.Genres = await _genreRepository.GetAllAsync();
 
         return View(new Film
         {
@@ -110,7 +116,8 @@ public class FilmsController : Controller
             Plot = film.Plot,
             RatingId = film.RatingId,
             ReleaseDate = film.ReleaseDate,
-            CountryOfOriginId = film.CountryOfOriginId
+            CountryOfOriginId = film.CountryOfOriginId,
+            GenreIds = film.Genres.Select(g => g.Id).ToList()
         });
     }
 
@@ -122,19 +129,22 @@ public class FilmsController : Controller
             ViewBag.Directors = await _directorRepository.GetAllAsync();
             ViewBag.Countries = await _countryRepository.GetAllAsync();
             ViewBag.Ratings = await _ratingRepository.GetAllAsync();
-            return View();
+            ViewBag.Genres = await _genreRepository.GetAllAsync();
+            return View(film);
         }
 
+        var genres = await _genreRepository.GetMultipleAsync(film.GenreIds);
         var currentFilm = await _filmRepository.GetAsync(filmId);
         if (currentFilm is not null)
         {
             currentFilm.Title = film.Title;
-            currentFilm.Year = film.Year;
+            currentFilm.Year = film.Year!.Value;
             currentFilm.DirectorId = film.DirectorId!.Value;
             currentFilm.Plot = film.Plot;
             currentFilm.RatingId = film.RatingId!.Value;
-            currentFilm.ReleaseDate = film.ReleaseDate;
+            currentFilm.ReleaseDate = film.ReleaseDate!.Value;
             currentFilm.CountryOfOriginId = film.CountryOfOriginId!.Value;
+            currentFilm.Genres = genres;
             await _filmRepository.SaveAsync();
         }
 
