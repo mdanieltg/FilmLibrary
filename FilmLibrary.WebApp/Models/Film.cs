@@ -16,8 +16,8 @@ public class Film
     [Required(ErrorMessage = "El director es requerido.")]
     public Guid? DirectorId { get; set; }
 
-    [Required(ErrorMessage = "El argumento de la película es requierido.")]
-    [MaxLength(255, ErrorMessage = "La longitud del título no puede ser mayor a 255 caracteres.")]
+    [Required(ErrorMessage = "El argumento de la película es requerido.")]
+    [MaxLength(255, ErrorMessage = "La longitud del argumento de la película no puede ser mayor a 255 caracteres.")]
     public string Plot { get; set; } = "";
 
     [Required(ErrorMessage = "La clasificación es requerida.")]
