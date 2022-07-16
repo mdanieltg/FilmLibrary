@@ -15,7 +15,7 @@ public class GenreRepository : IGenreRepository
         _dbContext = dbContext ?? throw new ArgumentNullException(nameof(dbContext));
     }
 
-    public async Task<IEnumerable<Genre>> GetAllAsync()
+    public async Task<ICollection<Genre>> GetAllAsync()
     {
         return await _dbContext.Genres
             .OrderBy(g => g.Name)

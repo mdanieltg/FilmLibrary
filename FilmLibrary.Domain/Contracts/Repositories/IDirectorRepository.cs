@@ -5,7 +5,7 @@ namespace FilmLibrary.Domain.Contracts.Repositories;
 
 public interface IDirectorRepository
 {
-    Task<IEnumerable<Director>> GetAllAsync();
+    Task<ICollection<Director>> GetAllAsync();
     Task<PaginatedResult<Director>> GetPaginatedAsync(int offset, int count);
     Task<PaginatedResult<Director>> PaginatedSearchAsync(string searchString, int offset, int count);
     Task<Director?> GetAsync(Guid directorId);

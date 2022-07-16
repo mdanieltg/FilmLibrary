@@ -15,7 +15,7 @@ public class DirectorRepository : IDirectorRepository
         _dbContext = dbContext ?? throw new ArgumentNullException(nameof(dbContext));
     }
 
-    public async Task<IEnumerable<Director>> GetAllAsync()
+    public async Task<ICollection<Director>> GetAllAsync()
     {
         return await _dbContext.Directors
             .OrderBy(d => d.Name)

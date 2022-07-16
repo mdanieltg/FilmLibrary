@@ -1,0 +1,25 @@
+﻿@{
+    ViewData["Title"] = "Faltan datos";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<p>Antes de poder agregar una película, debe agregar los directores, países y géneros que va a necesitar.</p>
+
+<p>Datos faltantes:</p>
+<ul>
+    @if (ViewBag.Directors == true)
+    {
+        <li>Directores - <a asp-controller="Directors" asp-action="Add">agregar</a>.</li>
+    }
+    @if (ViewBag.Coutries == true)
+    {
+        <li>Países - <a asp-controller="Countries" asp-action="Add">agregar</a>.</li>
+    }
+    @if (ViewBag.Genres == true)
+    {
+        <li>Géneros - <a asp-controller="Genres" asp-action="Add">agregar</a>.</li>
+    }
+</ul>
+
+<a asp-action="Index" class="btn btn-info">Volver a la lista</a>

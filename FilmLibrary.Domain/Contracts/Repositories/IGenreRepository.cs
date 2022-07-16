@@ -5,7 +5,7 @@ namespace FilmLibrary.Domain.Contracts.Repositories;
 
 public interface IGenreRepository
 {
-    Task<IEnumerable<Genre>> GetAllAsync();
+    Task<ICollection<Genre>> GetAllAsync();
     Task<ICollection<Genre>> GetMultipleAsync(IEnumerable<Guid> genreIds);
     Task<PaginatedResult<Genre>> GetPaginatedAsync(int offset, int count);
     Task<PaginatedResult<Genre>> PaginatedSearchAsync(string searchString, int offset, int count);

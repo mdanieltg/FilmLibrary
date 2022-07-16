@@ -45,10 +45,22 @@ public class FilmsController : Controller
     [HttpGet("add")]
     public async Task<ActionResult> Add()
     {
-        ViewBag.Directors = await _directorRepository.GetAllAsync();
-        ViewBag.Countries = await _countryRepository.GetAllAsync();
+        var directors = await _directorRepository.GetAllAsync();
+        var countries = await _countryRepository.GetAllAsync();
+        var genres = await _genreRepository.GetAllAsync();
+
+        if (directors.Count == 0 || countries.Count == 0 || genres.Count == 0)
+        {
+            ViewBag.Directors = directors.Count == 0;
+            ViewBag.Countries = countries.Count == 0;
+            ViewBag.Genres = genres.Count == 0;
+            return View("MissingData");
+        }
+
+        ViewBag.Directors = directors;
+        ViewBag.Countries = countries;
+        ViewBag.Genres = genres;
         ViewBag.Ratings = await _ratingRepository.GetAllAsync();
-        ViewBag.Genres = await _genreRepository.GetAllAsync();
         return View();
     }
 

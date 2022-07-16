@@ -15,7 +15,7 @@ public class CountryRepository : ICountryRepository
         _dbContext = dbContext ?? throw new ArgumentNullException(nameof(dbContext));
     }
 
-    public async Task<IEnumerable<Country>> GetAllAsync()
+    public async Task<ICollection<Country>> GetAllAsync()
     {
         return await _dbContext.Countries
             .OrderBy(c => c.Name)
